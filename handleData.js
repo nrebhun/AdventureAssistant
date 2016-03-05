@@ -50,7 +50,7 @@ Observer.prototype = Object.create(Player.prototype);
 Observer.prototype.constructor = Observer;
 
 Observer.prototype.greet = function() {
-	console.log("I, " + this.playerName + " am neither a Character nor a Dungeon Master, and therefore my greeting does not derive from Player.");
+	console.log("I, " + this.playerName + " am neither a Character nor a Dungeon Master, and therefore my greeting should be different from a Player.");
 };
 
 var zach = new DungeonMaster("Zach");
