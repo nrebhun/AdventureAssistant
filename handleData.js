@@ -1,62 +1,57 @@
 
 function processCharacterData(dataSetSize) {
-        var categories = [];
-        var values = [];
+    var categories = [];
+    var values = [];
 
     categories.push(firstData, secondData);
 
-        return categories;
+    return categories;
 }
 
 // Begin Message Definition
 var Message = function() {
-        this.timeStamp = 0;
-        this.sender = "Default";
+    this.timeStamp = 0;
+    this.sender = "Default";
 }
 
 // Begin Game Definition
-var Game = function() {
-        this.dungeonMaster = "Default";
-        this.characters = [];
-}
-
-Game.prototype.initialize = function(dungeonMaster, characters) {
-        this.dungeonMaster = dungeonMaster;
-        this.characters = characters;
+var Game = function(dungeonMaster, characters) {
+    this.dungeonMaster = dungeonMaster;
+    this.characters = characters;
 }
 
 Game.prototype.listPlayers = function() {
-        console.log("Your Dungeon Master is:\n" + this.dungeonMaster.playerName);
-        console.log("Adventurers:");
-        for (var i = 0; i < this.characters.length; i++) {
-                console.log(this.characters[i].playerName);
-        }
+    console.log("Your Dungeon Master is:\n" + this.dungeonMaster.playerName);
+    console.log("Adventurers:");
+    for (var i = 0; i < this.characters.length; i++) {
+        console.log(this.characters[i].playerName);
+    }
 }
 
 // Begin Player Definition
 var Player = function() {
-        this.isCharacter = true;
+    this.isCharacter = true;
 };
 
 Player.prototype.greet = function() {
-        if (this.isCharacter) {
-                console.log("Welcome, " + this.characterName + 
-                                        ", the Level " + this.characterLevel + 
-                                        " " + this.characterClass + 
-                                        " " + this.characterRace + "!");
-        } else {
-                console.log("Welcome, Dungeon Master " + this.playerName + "!");
-        }
+    if (this.isCharacter) {
+        console.log("Welcome, " + this.characterName + 
+                    ", the Level " + this.characterLevel + 
+                    " " + this.characterClass + 
+                    " " + this.characterRace + "!");
+    } else {
+        console.log("Welcome, Dungeon Master " + this.playerName + "!");
+    }
 };
 
 // Begin Character Definition
 var Character = function(realName, gameName, level, gameClass, race) {
-        Player.call(this); 
-        this.playerName = realName;
-        this.characterName = gameName;
-        this.characterLevel = level;
-        this.characterClass = gameClass;
-        this.characterRace = race;
+    Player.call(this); 
+    this.playerName = realName;
+    this.characterName = gameName;
+    this.characterLevel = level;
+    this.characterClass = gameClass;
+    this.characterRace = race;
 };
 
 Character.prototype = Object.create(Player.prototype);
@@ -64,8 +59,8 @@ Character.prototype.constructor = Character;
 
 // Begin Dungeon Master Definition
 var DungeonMaster = function(realName) {
-        this.playerName = realName;
-        this.isCharacter = false;
+    this.playerName = realName;
+    this.isCharacter = false;
 };
 
 DungeonMaster.prototype = Object.create(Player.prototype);
@@ -73,16 +68,16 @@ DungeonMaster.prototype.constructor = DungeonMaster;
 
 // Begin Observer Definition
 var Observer = function(realName) {
-        this.playerName = realName;
+    this.playerName = realName;
 };
 
 Observer.prototype = Object.create(Player.prototype);
 Observer.prototype.constructor = Observer;
 
 Observer.prototype.greet = function() {
-        console.log("I, " + this.playerName + " am neither a Character nor " +
-                                "a Dungeon Master, and therefore my greeting should be " +
-                                "different from a Player.");
+    console.log("I, " + this.playerName + " am neither a Character nor " +
+                "a Dungeon Master, and therefore my greeting should be " +
+                "different from a Player.");
 };
 
 // Making use of the stuff above
