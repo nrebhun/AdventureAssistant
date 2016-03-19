@@ -90,7 +90,7 @@ Player.prototype.printAddressBook = function() {
     }
 }
 
-Player.prototype.sendMessage = function(recipient, content) { 
+Player.prototype.sendMessage = function(recipient, content) {
     for (var i = 0; i < this.addressBook.length; i++) {
         if (this.addressBook[i].playerName === recipient || this.addressBook[i].characterName === recipient) {
             if (this.addressBook[i].messageThreads.length === 0) {
