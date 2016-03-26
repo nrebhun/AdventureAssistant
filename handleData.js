@@ -8,6 +8,14 @@ function processCharacterData(dataSetSize) {
     return categories;
 }
 
+// Begin Item Definition
+var Item = function(name, weight, value, quantity) {
+    this.name = name;
+    this.weight = weight;
+    this.value = value;
+    this.quantity = quantity;
+}
+
 // Begin Message Definition
 var Message = function() {
     this.timeStamp = 0;
@@ -23,8 +31,9 @@ var Game = function(dungeonMaster, characters) {
 Game.prototype.listPlayers = function() {
     console.log("Your Dungeon Master is:\n" + this.dungeonMaster.playerName);
     console.log("Adventurers:");
-    for (var i = 0; i < this.characters.length; i++) {
-        console.log(this.characters[i].playerName);
+    for (var player in this.characters) {
+        console.log(this.characters[player].playerName + " (" + 
+                    this.characters[player].characterName + ")");
     }
 }
 
@@ -52,13 +61,41 @@ var Character = function(realName, gameName, level, gameClass, race) {
     this.characterLevel = level;
     this.characterClass = gameClass;
     this.characterRace = race;
+    this.inventory = [];
+    this.money = { "Copper Pieces"      : 0,
+                   "Silver Pieces"      : 0,
+                   "Gold Pieces"        : 0,
+                   "Platinum Pieces"    : 0,
+                   "Electrum Pieces"    : 0};
 };
 
 Character.prototype = Object.create(Player.prototype);
 Character.prototype.constructor = Character;
 
+Character.prototype.addItem = function(newItem) {
+    for (var item in this.inventory) {
+        if (this.inventory[item].name === newItem.name) {
+            this.inventory[item].quantity += newItem.quantity;
+            return "Added new quantity to existing quantity.";
+        }
+    }
+
+    this.inventory.push(newItem);
+    return "Added new item to inventory";
+}
+
+Character.prototype.listInventory = function() {
+    for (var item in this.inventory) {
+        console.log(item.name + ", " + 
+                    item.weight + "lbs, $" + 
+                    item.value + " (" + 
+                    item.quantity + ")");
+    }
+}
+
 // Begin Dungeon Master Definition
 var DungeonMaster = function(realName) {
+    Player.call(this);
     this.playerName = realName;
     this.isCharacter = false;
 };
@@ -81,16 +118,13 @@ Observer.prototype.greet = function() {
 };
 
 // Making use of the stuff above
-var game = new Game();
 var zach = new DungeonMaster("Zach");
-var molly = new Character("Molly", "Kalen", 3, "Rogue", "Human?");
+var molly = new Character("Molly", "Kalen", 3, "Rogue", "Elf");
 var nick = new Character("Nick", "Delmirev", 3, "Paladin", "Dragonborn");
 var nate = new Observer("Nate");
+var game = new Game(zach, [molly, nick]);
 
 zach.greet();
 molly.greet();
 nick.greet();
 nate.greet();
-
-game.initialize(zach, [molly, nick]);
-game.listPlayers();
