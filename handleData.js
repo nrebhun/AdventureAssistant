@@ -4,7 +4,6 @@ function processCharacterData(dataSetSize) {
     var values = [];
 
     categories.push(firstData, secondData);
-
     return categories;
 }
 
@@ -84,12 +83,26 @@ Character.prototype.addItem = function(newItem) {
     return "Added new item to inventory";
 }
 
+Character.prototype.removeItem = function(targetItem) {
+    for (var item in this.inventory) {
+        if (this.inventory[item].name === targetItem.name) {
+            this.inventory[item].quantity -= targetItem.quantity;
+            if (this.inventory[item].quantity === 0) {
+                this.inventory.splice(item, 1);
+            }
+            return "Removed quantity from existing quantity.";
+        }
+    }
+
+    return "Item not found in inventory";
+}
+
 Character.prototype.listInventory = function() {
     for (var item in this.inventory) {
-        console.log(item.name + ", " + 
-                    item.weight + "lbs, $" + 
-                    item.value + " (" + 
-                    item.quantity + ")");
+        console.log(this.inventory[item].name + ", " + 
+                    this.inventory[item].weight + "lbs, $" + 
+                    this.inventory[item].value + " (" + 
+                    this.inventory[item].quantity + ")");
     }
 }
 
