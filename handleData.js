@@ -116,6 +116,9 @@ var DungeonMaster = function(realName) {
 DungeonMaster.prototype = Object.create(Player.prototype);
 DungeonMaster.prototype.constructor = DungeonMaster;
 
+DungeonMaster.prototype.distributeExperience(amount) {
+    for ()
+}
 // Begin Observer Definition
 var Observer = function(realName) {
     this.playerName = realName;
