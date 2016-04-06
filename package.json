@@ -1,0 +1,27 @@
+{
+  "name": "adventure-assistant",
+  "version": "0.0.1",
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "eslint": "^2.4.0",
+    "eslint-config-airbnb": "^6.1.0",
+    "eslint-plugin-react": "^4.2.3"
+  },
+  "description": "A tool to help tabletop-RPG players easily manage details such as weight, inventory, currency and more.",
+  "main": "handleData.js",
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/nrebhun/AdventureAssistant.git"
+  },
+  "keywords": [
+    "Adventure",
+    "Assistant",
+    "RPG"
+  ],
+  "author": "Nicholas Rebhun",
+  "license": "ISC"
+}
