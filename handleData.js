@@ -156,13 +156,6 @@ var nick = new Character("Nick", "Delmirev", 3, "Paladin", "Dragonborn");
 var nate = new Observer("Nate");
 var game = new Game(zach, [molly, nick]);
 game.establishAddressBooks();
-/*
-game.listPlayers();
 
-zach.greet();
-molly.greet();
-nick.greet();
-nate.greet();
-*/
 nick.sendMessage("Molly", "Hello, World!");
 molly.messageThreads[0].listMessagesInThread();
