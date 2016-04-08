@@ -113,16 +113,30 @@ Player.prototype.sendMessage = function(recipient, content) {
 
 // Begin Character Definition
 var Character = function(realName, gameName, level, gameClass, race) {
-    Player.call(this); 
+    Player.call(this);
     this.playerName = realName;
     this.characterName = gameName;
     this.characterLevel = level;
     this.characterClass = gameClass;
     this.characterRace = race;
+    this.currentExperience = 0;
+    this.experienceRequirements = [300, 900, 2700, 5400];
 };
 
 Character.prototype = Object.create(Player.prototype);
 Character.prototype.constructor = Character;
+
+Character.prototype.addExperience = function(amount) {
+    this.currentExperience += amount;
+    if (this.currentExperience >= this.experienceRequirements[this.characterLevel-1]) {
+        this.increaseLevel();
+    }
+}
+
+Character.prototype.increaseLevel = function() {
+    this.characterLevel++;
+    console.log(this.characterName + " has reached level " + this.characterLevel);
+}
 
 // Begin Dungeon Master Definition
 var DungeonMaster = function(realName) {
@@ -134,6 +148,13 @@ var DungeonMaster = function(realName) {
 
 DungeonMaster.prototype = Object.create(Player.prototype);
 DungeonMaster.prototype.constructor = DungeonMaster;
+
+DungeonMaster.prototype.distributeExperience = function(total) {
+    var amount = total / this.addressBook.length;
+    for (var i = 0; i < this.addressBook.length; i++) {
+        this.addressBook[i].addExperience(amount);
+    }
+}
 
 // Begin Observer Definition
 var Observer = function(realName) {
@@ -151,8 +172,8 @@ Observer.prototype.greet = function() {
 
 // Making use of the stuff above
 var zach = new DungeonMaster("Zach");
-var molly = new Character("Molly", "Kalen", 3, "Rogue", "Human?");
-var nick = new Character("Nick", "Delmirev", 3, "Paladin", "Dragonborn");
+var molly = new Character("Molly", "Kalen", 1, "Rogue", "Human?");
+var nick = new Character("Nick", "Delmirev", 2, "Paladin", "Dragonborn");
 var nate = new Observer("Nate");
 var game = new Game(zach, [molly, nick]);
 game.establishAddressBooks();
