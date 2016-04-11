@@ -7,12 +7,54 @@ function processCharacterData(dataSetSize) {
     return categories;
 }
 
+// Enums
+InventoryResult = {
+    UpdatedExisting     : 0,
+    AddedNew            : 1,
+    Removed             : 2,
+    NotPresent          : 3,
+};
+
+Race = {
+    Dragonborn  : "Dragonborn",
+    Dwarf       : "Dwarf",
+    Elf         : "Elf",
+    Gnome       : "Gnome",
+    Halfling    : "Halfling",
+    HalfElf     : "Half-Elf",
+    HalfOrc     : "Half-Orc",
+    Tiefling    : "Tiefling",
+};
+
+Class = {
+    Barbarian   : "Barbarian",
+    Bard        : "Bard",
+    Cleric      : "Cleric",
+    Druid       : "Druid",
+    Fighter     : "Fighter",
+    Monk        : "Monk",
+    Paladin     : "Paladin",
+    Ranger      : "Ranger",
+    Rogue       : "Rogue",
+    Sorcerer    : "Sorcerer",
+    Warlock     : "Warlock",
+    Wizard      : "Wizard",
+};
+
+
 // Begin Item Definition
 var Item = function(name, weight, value, quantity) {
     this.name = name;
     this.weight = weight;
     this.value = value;
     this.quantity = quantity;
+}
+
+Item.prototype.toString = function() {
+    return  this.name + ", " +
+            this.weight + "lbs, $" +
+            this.value + " (" + 
+            this.quantity + ")";
 }
 
 // Begin Message Definition
@@ -59,9 +101,9 @@ var Game = function(dungeonMaster, characters) {
 Game.prototype.listPlayers = function() {
     console.log("Your Dungeon Master is:\n" + this.dungeonMaster.playerName);
     console.log("Adventurers:");
-    for (var player in this.characters) {
-        console.log(this.characters[player].playerName + " (" + 
-                    this.characters[player].characterName + ")");
+    for (var i = 0; i < this.characters.length; i++) {
+        console.log(this.characters[i].playerName + " (" + 
+                    this.characters[i].characterName + ")");
     }
 }
 
@@ -127,49 +169,40 @@ var Character = function(realName, gameName, level, gameClass, race) {
     this.characterLevel = level;
     this.characterClass = gameClass;
     this.characterRace = race;
-    this.inventory = [];
-    this.money = { "Copper Pieces"      : 0,
-                   "Silver Pieces"      : 0,
-                   "Gold Pieces"        : 0,
-                   "Platinum Pieces"    : 0,
-                   "Electrum Pieces"    : 0};
+    this.inventory = {};
+    this.money = { "Copper"      : 0,
+                   "Silver"      : 0,
+                   "Gold"        : 0,
+                   "Platinum"    : 0,
+                   "Electrum"    : 0,
+                };
 };
 
 Character.prototype = Object.create(Player.prototype);
 Character.prototype.constructor = Character;
 
 Character.prototype.addItem = function(newItem) {
-    for (var item in this.inventory) {
-        if (this.inventory[item].name === newItem.name) {
-            this.inventory[item].quantity += newItem.quantity;
-            return "Added new quantity to existing quantity.";
-        }
+    if (newItem.name in this.inventory) {
+        this.inventory[newItem.name] += newItem.quantity;
+        return InventoryResult.UpdatedExisting;
     }
 
-    this.inventory.push(newItem);
-    return "Added new item to inventory";
+    this.inventory[newItem.name] = newItem;
+    return InventoryResult.AddedNew;
 }
 
 Character.prototype.removeItem = function(targetItem) {
-    for (var item in this.inventory) {
-        if (this.inventory[item].name === targetItem.name) {
-            this.inventory[item].quantity -= targetItem.quantity;
-            if (this.inventory[item].quantity === 0) {
-                this.inventory.splice(item, 1);
-            }
-            return "Removed quantity from existing quantity.";
-        }
+    if (targetItem.name in this.inventory) {
+        this.inventory[newItem.name] -= targetItem.quantity;
+        return InventoryResult.Removed;
     }
 
-    return "Item not found in inventory";
+    return InventoryResult.NotPresent;
 }
 
 Character.prototype.listInventory = function() {
-    for (var item in this.inventory) {
-        console.log(this.inventory[item].name + ", " + 
-                    this.inventory[item].weight + "lbs, $" + 
-                    this.inventory[item].value + " (" + 
-                    this.inventory[item].quantity + ")");
+    for (var itemKey in this.inventory) {
+        console.log(this.inventory[itemKey].toString());
     }
 }
 
@@ -200,8 +233,8 @@ Observer.prototype.greet = function() {
 
 // Making use of the stuff above
 var zach = new DungeonMaster("Zach");
-var molly = new Character("Molly", "Kalen", 3, "Rogue", "Elf");
-var nick = new Character("Nick", "Delmirev", 3, "Paladin", "Dragonborn");
+var molly = new Character("Molly", "Kalen", 3, Class.Rogue, Race.Elf);
+var nick = new Character("Nick", "Delmirev", 3, Class.Paladin, Race.Dragonborn);
 var nate = new Observer("Nate");
 var game = new Game(zach, [molly, nick]);
 
