@@ -41,7 +41,6 @@ Class = {
     Wizard      : "Wizard",
 };
 
-
 // Begin Item Definition
 var Item = function(name, weight, value, quantity) {
     this.name = name;
@@ -170,12 +169,13 @@ var Character = function(realName, gameName, level, gameClass, race) {
     this.characterClass = gameClass;
     this.characterRace = race;
     this.inventory = {};
-    this.money = { "Copper"      : 0,
-                   "Silver"      : 0,
-                   "Gold"        : 0,
-                   "Platinum"    : 0,
-                   "Electrum"    : 0,
-                };
+    this.money = { 
+        "Copper"     : 0,
+        "Silver"     : 0,
+        "Gold"       : 0,
+        "Platinum"   : 0,
+        "Electrum"   : 0,
+    };
 };
 
 Character.prototype = Object.create(Player.prototype);
