@@ -8,7 +8,6 @@ function processCharacterData(dataSetSize) {
     return categories;
 }
 
-// Begin Message Definition
 class Message {
     constructor(content) {
         this.timeStamp = new Date();
@@ -26,7 +25,6 @@ class Message {
     }
 }
 
-// Begin MessageThread Definition
 class MessageThread {
     constructor(sender, receiver) {
         this.sender = sender;
@@ -71,7 +69,6 @@ class Game {
     }
 }
 
-// Begin Player Definition
 class Player {
     constructor() {
         this.isCharacter = true;
@@ -118,7 +115,6 @@ class Player {
     }
 }
 
-// Begin Character Definition
 class Character extends Player {
     constructor() {
         super();
@@ -131,8 +127,7 @@ class Character extends Player {
     }
 }
 
-// Begin Dungeon Master Definition
-class DungeonMaster {
+class DungeonMaster extends Player {
     constructor() {
         super();
 
@@ -142,7 +137,6 @@ class DungeonMaster {
     }
 }
 
-// Making use of the stuff above
 var zach = new DungeonMaster("Zach");
 var molly = new Character("Molly", "Kalen", 3, "Rogue", "Human?");
 var nick = new Character("Nick", "Delmirev", 3, "Paladin", "Dragonborn");
