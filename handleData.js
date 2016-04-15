@@ -24,7 +24,7 @@ Message.prototype.getFormattedTimestamp = function() {
             this.timeStamp.getSeconds();
 }
 
-// Begin MessageThread Definition
+// Begin MessageThread Definition, MAY NOT BE NECESSARY
 var MessageThread = function(sender, receiver) {
     this.sender = sender;
     this.receiver = receiver;
@@ -36,7 +36,7 @@ MessageThread.prototype.addMessageToThread = function(message) {
 }
 
 MessageThread.prototype.listMessagesInThread = function() {
-    console.log(this.sender + " -> " + this.receiver);
+    console.log(this.sender + " <-> " + this.receiver);
     for (var i = 0; i < this.messages.length; i++) {
         console.log(this.messages[i].getFormattedTimestamp());
         console.log(this.messages[i].content);
@@ -70,7 +70,7 @@ Game.prototype.establishAddressBooks = function() {
 var Player = function() {
     this.isCharacter = true;
     this.addressBook = [];
-    this.messageThreads = [];
+    this.conversation = {};
 };
 
 Player.prototype.greet = function() {
@@ -91,6 +91,20 @@ Player.prototype.printAddressBook = function() {
 }
 
 Player.prototype.sendMessage = function(recipient, content) {
+
+    if (recipient.playerName in this.conversation) {
+        this.conversation[recipient.playerName].push(content);
+    } else {
+        this.conversation[recipient.playerName] = [content];
+    }
+
+    if (this.playerName in recipient.conversation) {
+        recipient.conversation[this.playerName].push(content);
+    } else {
+        recipient.conversation[this.playerName] = [content];
+    }
+
+    /* Old method for player lookup and conversation establishment:
     for (var i = 0; i < this.addressBook.length; i++) {
         if (this.addressBook[i].playerName === recipient || this.addressBook[i].characterName === recipient) {
             if (this.addressBook[i].messageThreads.length === 0) {
@@ -109,6 +123,7 @@ Player.prototype.sendMessage = function(recipient, content) {
             }
         }
     }
+    */
 }
 
 // Begin Character Definition
@@ -135,34 +150,12 @@ var DungeonMaster = function(realName) {
 DungeonMaster.prototype = Object.create(Player.prototype);
 DungeonMaster.prototype.constructor = DungeonMaster;
 
-// Begin Observer Definition
-var Observer = function(realName) {
-    this.playerName = realName;
-};
-
-Observer.prototype = Object.create(Player.prototype);
-Observer.prototype.constructor = Observer;
-
-Observer.prototype.greet = function() {
-    console.log("I, " + this.playerName + " am neither a Character nor " +
-                "a Dungeon Master, and therefore my greeting should be " +
-                "different from a Player.");
-};
-
 // Making use of the stuff above
 var zach = new DungeonMaster("Zach");
 var molly = new Character("Molly", "Kalen", 3, "Rogue", "Human?");
 var nick = new Character("Nick", "Delmirev", 3, "Paladin", "Dragonborn");
-var nate = new Observer("Nate");
 var game = new Game(zach, [molly, nick]);
 game.establishAddressBooks();
-/*
-game.listPlayers();
 
-zach.greet();
-molly.greet();
-nick.greet();
-nate.greet();
-*/
-nick.sendMessage("Molly", "Hello, World!");
-molly.messageThreads[0].listMessagesInThread();
+nick.sendMessage(molly, "Hello, World!");
+//molly.messageThreads[nick.playerName].listMessagesInThread();
