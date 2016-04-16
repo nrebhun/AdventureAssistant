@@ -56,6 +56,10 @@ Item.prototype.toString = function() {
             this.quantity + ")";
 }
 
+Item.prototype.clone = function() {
+    return new Item(this.name, this.weight, this.value, this.quantity);
+}
+
 // Begin Message Definition
 var Message = function(content) {
     this.timeStamp = new Date();
@@ -183,18 +187,24 @@ Character.prototype.constructor = Character;
 
 Character.prototype.addItem = function(newItem) {
     if (newItem.name in this.inventory) {
-        this.inventory[newItem.name] += newItem.quantity;
+        this.inventory[newItem.name].quantity += newItem.quantity;
         return InventoryResult.UpdatedExisting;
     }
 
-    this.inventory[newItem.name] = newItem;
+    this.inventory[newItem.name] = newItem.clone();
     return InventoryResult.AddedNew;
 }
 
 Character.prototype.removeItem = function(targetItem) {
     if (targetItem.name in this.inventory) {
-        this.inventory[newItem.name] -= targetItem.quantity;
-        return InventoryResult.Removed;
+        this.inventory[targetItem.name].quantity -= targetItem.quantity;
+
+        if (this.inventory[targetItem.name].quantity <= 0) {
+            delete this.inventory[targetItem.name];
+            return InventoryResult.Removed;
+        } else {
+            return InventoryResult.UpdatedExisting;
+        }
     }
 
     return InventoryResult.NotPresent;
@@ -202,7 +212,8 @@ Character.prototype.removeItem = function(targetItem) {
 
 Character.prototype.listInventory = function() {
     for (var itemKey in this.inventory) {
-        console.log(this.inventory[itemKey].toString());
+        console.log(itemKey);
+        console.log(this.inventory[itemKey]);
     }
 }
 
