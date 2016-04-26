@@ -129,7 +129,7 @@ class Player {
         this.playerName = realName;
         this.characterName = characterName;
         this.addressBook = [];
-        this.messageThreads = [];
+        this.conversations = [];
     }
 
     greet() {
