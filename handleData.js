@@ -41,7 +41,6 @@ Class = {
     Wizard      : "Wizard",
 };
 
-// Begin Item Definition
 class Item {
     constructor(name, weight, value, quantity) {
         this.name = name;
@@ -172,7 +171,7 @@ class Player {
 }
 
 class Character extends Player {
-    constructor(realName, characterName, level, characterClass, characterRace) {
+    constructor(realName, characterName, level, initialExperience, characterClass, characterRace) {
         super(realName, characterName);
 
         this.characterLevel = level;
@@ -186,6 +185,8 @@ class Character extends Player {
             "Platinum"   : 0,
             "Electrum"   : 0,
         };
+        this.currentExperience = initialExperience;
+        this.experienceRequirements = [300, 900, 2700, 5400];
     }
 
     addItem(newItem) {
@@ -219,7 +220,7 @@ class Character extends Player {
         }
     }
 
-    increaseLevel() {
+    increaseLevel() {   // This will become more involved later, when stats are tracked
         this.characterLevel++;
         console.log(this.characterName + " has reached level " + this.characterLevel);
     }
@@ -238,11 +239,10 @@ class DungeonMaster extends Player {
         this.addressBook[i].addExperience(amount);
     }
 }
-}
 
 var zach = new DungeonMaster("Zach");
-var molly = new Character("Molly", "Kalen", 3, Class.Rogue, Race.Elf);
-var nick = new Character("Nick", "Delmirev", 3, Class.Paladin, Race.Dragonborn);
+var molly = new Character("Molly", "Kalen", 3, 2500, Class.Rogue, Race.Elf);
+var nick = new Character("Nick", "Delmirev", 3, 2500, Class.Paladin, Race.Dragonborn);
 var game = new Game(zach, [molly, nick]);
 
 game.establishAddressBooks();
