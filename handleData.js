@@ -218,11 +218,16 @@ class Character extends Player {
         if (this.currentExperience >= this.experienceRequirements[this.characterLevel-1]) {
             this.increaseLevel();
         }
+        this.displayExperience();
     }
 
     increaseLevel() {   // This will become more involved later, when stats are tracked
         this.characterLevel++;
         console.log(this.characterName + " has reached level " + this.characterLevel);
+    }
+
+    displayExperience() {
+        console.log(this.characterName + ": " + this.currentExperience + " / " + this.experienceRequirements[this.characterLevel-1]);
     }
 }
 
@@ -234,9 +239,10 @@ class DungeonMaster extends Player {
     }
 
     distributeExperience(total) {
-    var amount = total / this.addressBook.length;
-    for (var i = 0; i < this.addressBook.length; i++) {
-        this.addressBook[i].addExperience(amount);
+        var amount = total / this.addressBook.length;
+        for (var i = 0; i < this.addressBook.length; i++) {
+            this.addressBook[i].addExperience(amount);
+        }
     }
 }
 
