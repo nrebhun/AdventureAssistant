@@ -41,6 +41,13 @@ Class = {
     Wizard      : "Wizard",
 };
 
+// Constants
+const generalExpRequirements = [0, 300, 900, 2700,
+                                6500, 14000, 23000, 34000, 
+                                48000, 64000, 85000, 100000, 
+                                120000, 140000, 165000, 195000,
+                                225000, 265000, 305000, 355000,];
+
 class Item {
     constructor(name, weight, value, quantity) {
         this.name = name;
@@ -186,7 +193,7 @@ class Character extends Player {
             "Electrum"   : 0,
         };
         this.currentExperience = initialExperience;
-        this.experienceRequirements = [300, 900, 2700, 5400];
+        this.experienceRequirements = generalExpRequirements;
     }
 
     addItem(newItem) {
@@ -202,6 +209,13 @@ class Character extends Player {
     removeItem(targetItem) {
         if (targetItem.name in this.inventory) {
             this.inventory[targetItem.name].quantity -= targetItem.quantity;
+
+            if (this.inventory[targetItem.name].quantity <= 0) {
+                delete this.inventory[targetItem.name];
+                return InventoryResult.Removed;
+            } else {
+                return InventoryResult.UpdatedExisting;
+            }
         }
         return InventoryResult.NotPresent;
     }
@@ -215,7 +229,7 @@ class Character extends Player {
 
     addExperience(amount) {
         this.currentExperience += amount;
-        if (this.currentExperience >= this.experienceRequirements[this.characterLevel-1]) {
+        if (this.currentExperience >= this.experienceRequirements[this.characterLevel]) {
             this.increaseLevel();
         }
         this.displayExperience();
@@ -227,7 +241,9 @@ class Character extends Player {
     }
 
     displayExperience() {
-        console.log(this.characterName + ": " + this.currentExperience + " / " + this.experienceRequirements[this.characterLevel-1]);
+        console.log(this.characterName + ": " + 
+                    this.currentExperience + " / " + 
+                    this.experienceRequirements[this.characterLevel]);
     }
 }
 
