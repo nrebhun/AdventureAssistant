@@ -4,8 +4,9 @@
   "pre-commit": "lint",
   "scripts": {
     "build": "babel handleData.js -d lib",
-    "serve": "",
+    "karma": "karma start karma.conf.js",
     "lint": "eslint --fix *.js",
+    "serve": "",
     "test": "./test.sh"
   },
   "devDependencies": {
