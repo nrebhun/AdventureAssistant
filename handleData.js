@@ -8,14 +8,14 @@ function processCharacterData(dataSetSize) {
 }
 
 // Enums
-var InventoryResult = {
+const InventoryResult = {
     UpdatedExisting     : 0,
     AddedNew            : 1,
     Removed             : 2,
     NotPresent          : 3,
 };
 
-var Race = {
+const Race = {
     Dragonborn  : "Dragonborn",
     Dwarf       : "Dwarf",
     Elf         : "Elf",
@@ -26,7 +26,7 @@ var Race = {
     Tiefling    : "Tiefling",
 };
 
-var Class = {
+const Class = {
     Barbarian   : "Barbarian",
     Bard        : "Bard",
     Cleric      : "Cleric",
