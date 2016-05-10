@@ -269,4 +269,4 @@ var game = new Game(zach, [molly, nick]);
 
 game.establishAddressBooks();
 
-nick.sendMessage(molly, "Hello, World!");
+nick.sendMessage(molly, "Hello!");
