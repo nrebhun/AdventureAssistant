@@ -7,7 +7,8 @@
     "karma": "karma start karma.conf.js",
     "lint": "eslint --fix *.js",
     "serve": "",
-    "test": "./test.sh"
+    "test": "./test.sh",
+    "webpack" : "webpack src/handleData.js handleData.bundle.js"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
