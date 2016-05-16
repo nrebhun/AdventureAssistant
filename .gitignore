@@ -23,6 +23,10 @@ build/Release
 # Dependency directories
 node_modules/
 
+# Target directories:
+lib/
+bundles/
+
 # Optional npm cache directory
 .npm
 

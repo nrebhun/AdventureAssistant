@@ -15,6 +15,12 @@ const InventoryResult = {
     NotPresent          : 3,
 };
 
+const MessageResults = {
+    newConversation     : 0,
+    messageSent         : 1,
+    recipentNotFound    : 2,
+};
+
 const Race = {
     Dragonborn  : "Dragonborn",
     Dwarf       : "Dwarf",
@@ -96,6 +102,10 @@ class Conversation {
         this.messages.push(message);
     }
 
+    addMessageToRecipientConversation() {
+        
+    }
+
     listMessagesInConversation() {
         console.log(this.sender + " <-> " + this.receiver);
         for (var i = 0; i < this.messages.length; i++) {
@@ -135,7 +145,7 @@ class Player {
         this.playerName = realName;
         this.characterName = characterName;
         this.addressBook = [];
-        this.conversations = [];
+        this.conversations = {};
     }
 
     greet() {
@@ -156,23 +166,14 @@ class Player {
     }
 
     sendMessage(recipient, content) {
-        for (var i = 0; i < this.addressBook.length; i++) {
-            if (this.addressBook[i].playerName === recipient || this.addressBook[i].characterName === recipient) {
-                if (this.addressBook[i].messageThreads.length === 0) {
-                    var newMessageThread = new MessageThread(this.characterName, this.addressBook[i].characterName);
-                    this.addressBook[i].messageThreads.push(newMessageThread);
-                    this.addressBook[i].messageThreads[0].addMessageToThread(new Message(content));
-                } else {
-                    for (var j = 0; j < this.addressBook[i].messageThreads.length; j++) {
-                        if (this.addressBook[i].messageThreads[j].sender === this.characterName) {
-                            this.addressBook[i].messageThreads[j].addMessageToThread(new Message(content));
-                        } else if (j === (messageThreads.length - 1)) {
-                            var newMessageThread = new MessageThread(this.characterName, recipient, content);
-                            this.addressBook[i].messageThreads.push(newMessageThread);
-                        }
-                    }
-                }
-            }
+        var theMessage = new Message(content);
+
+        if (recipient.playerName in this.conversations) {
+            this.conversations[recipient.playerName].addMessageToConversation(theMessage);
+            return MessageResults.messageSent;
+        } else {
+            this.conversations[recipient.playerName] = [theMessage];
+            return MessageResults.newConversation;
         }
     }
 }
