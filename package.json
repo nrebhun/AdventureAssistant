@@ -4,11 +4,12 @@
   "pre-commit": "lint",
   "scripts": {
     "build": "babel handleData.js -d lib",
+    "build-run": "npm run babel && npm run webpack && npm run karma",
     "karma": "karma start karma.conf.js",
     "lint": "eslint --fix *.js",
     "serve": "",
     "test": "./test.sh",
-    "webpack" : "webpack src/handleData.js handleData.bundle.js"
+    "webpack" : "webpack src/handleData.js handleData.bundle.js --target node"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

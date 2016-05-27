@@ -25,7 +25,7 @@ node_modules/
 
 # Target directories:
 lib/
-bundles/
+bundle/
 
 # Optional npm cache directory
 .npm
