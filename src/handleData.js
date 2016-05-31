@@ -262,12 +262,3 @@ class DungeonMaster extends Player {
         }
     }
 }
-
-var zach = new DungeonMaster("Zach");
-var molly = new Character("Molly", "Kalen", 3, 2500, Class.Rogue, Race.Elf);
-var nick = new Character("Nick", "Delmirev", 3, 2500, Class.Paladin, Race.Dragonborn);
-var game = new Game(zach, [molly, nick]);
-
-game.establishAddressBooks();
-
-nick.sendMessage(molly, "Hello!");
