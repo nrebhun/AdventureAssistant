@@ -1,16 +1,12 @@
 class Conversation {
-    constructor(sender, receiver) {
-        this.sender = sender;
-        this.receiver = receiver;
+    constructor(participants, initialMessage) {
+        this.participants = participants;
         this.messages = [];
+        this.message.push(initialMessage);
     }
 
     addMessageToConversation(message) {
         this.messages.push(message);
-    }
-
-    addMessageToRecipientConversation() {
-        
     }
 
     listMessagesInConversation() {

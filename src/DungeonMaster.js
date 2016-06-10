@@ -1,3 +1,5 @@
+var Player = require('Player.js');
+
 class DungeonMaster extends Player {
     constructor(realName) {
         super(realName, "Dungeon Master");

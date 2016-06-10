@@ -1,7 +1,5 @@
 var assert = require('chai').assert;
 var compiledSource = require('../lib/handleDataCompiled.js');
-var classes = require('../lib/handleDataCompiled.js');
-
 
 describe('Array', function() {
     describe('#indexOf()', function () {

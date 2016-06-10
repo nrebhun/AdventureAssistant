@@ -1,3 +1,4 @@
+
 // Enums
 const MessageResults = {
     newConversation     : 0,
@@ -11,7 +12,7 @@ class Player {
         this.playerName = realName;
         this.characterName = characterName;
         this.addressBook = [];
-        this.conversations = {};
+        this.conversations = [];
     }
 
     greet() {
@@ -38,7 +39,7 @@ class Player {
             this.conversations[recipient.playerName].addMessageToConversation(theMessage);
             return MessageResults.messageSent;
         } else {
-            this.conversations[recipient.playerName] = [theMessage];
+            this.conversations[recipient.playerName] = new Conversation({recipient: recipient.playerName, sender: this.playerName}, theMessage);
             return MessageResults.newConversation;
         }
     }
