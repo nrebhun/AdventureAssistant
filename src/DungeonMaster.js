@@ -1,6 +1,6 @@
-var Player = require('Player.js');
+var baseClass = require('Player.js');
 
-class DungeonMaster extends Player {
+class DungeonMaster extends baseClass.Player {
     constructor(realName) {
         super(realName, "Dungeon Master");
 
