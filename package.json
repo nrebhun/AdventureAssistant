@@ -2,7 +2,7 @@
   "name": "adventure-assistant",
   "version": "0.0.1",
   "scripts": {
-    "build": "babel handleData.js -d lib"
+    "build": "babel handleData.js -d lib",
     "test" : "test.sh"
   },
   "devDependencies": {
@@ -25,5 +25,5 @@
     "RPG"
   ],
   "author": "Nicholas Rebhun",
-  "license": "ISC",
+  "license": "ISC"
 }
