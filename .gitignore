@@ -1,6 +1,7 @@
 # Unnecessary directories:
 node_modules/
 lib/
+bundle/
 
 # OS-specific files:
 .DS_Store
