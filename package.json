@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "babel handleData.js -d lib"
+    "test" : "test.sh"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
