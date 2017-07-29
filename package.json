@@ -9,7 +9,7 @@
     "lint": "eslint --fix *.js",
     "serve": "",
     "test": "./test.sh",
-    "webpack" : "webpack src/handleData.js handleData.bundle.js --target node"
+    "webpack": "webpack src/handleData.js handleData.bundle.js --target node"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
