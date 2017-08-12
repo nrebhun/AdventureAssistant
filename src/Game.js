@@ -1,3 +1,5 @@
+'use strict';
+
 class Game {
     constructor(dungeonMaster, characters) {
         this.dungeonMaster = dungeonMaster;

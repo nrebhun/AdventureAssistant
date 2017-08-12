@@ -1,4 +1,4 @@
-
+'use strict';
 
 // Enums
 const InventoryResult = {
@@ -36,8 +36,8 @@ const Class = {
 
 // Constants
 const generalExpRequirements = [0, 300, 900, 2700,
-                                6500, 14000, 23000, 34000, 
-                                48000, 64000, 85000, 100000, 
+                                6500, 14000, 23000, 34000,
+                                48000, 64000, 85000, 100000,
                                 120000, 140000, 165000, 195000,
                                 225000, 265000, 305000, 355000,];
 
@@ -49,7 +49,7 @@ class Character extends Player {
         this.characterClass = characterClass;
         this.characterRace = characterRace;
         this.inventory = {};
-        this.money = { 
+        this.money = {
             "Copper"     : 0,
             "Silver"     : 0,
             "Gold"       : 0,
@@ -105,8 +105,8 @@ class Character extends Player {
     }
 
     displayExperience() {
-        console.log(this.characterName + ": " + 
-                    this.currentExperience + " / " + 
+        console.log(this.characterName + ": " +
+                    this.currentExperience + " / " +
                     this.experienceRequirements[this.characterLevel]);
     }
 }

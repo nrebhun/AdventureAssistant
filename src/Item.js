@@ -1,3 +1,5 @@
+'use strict';
+
 class Item {
     constructor(name, weight, value, quantity) {
         this.name = name;
@@ -9,7 +11,7 @@ class Item {
     toString() {
         return  this.name + ", " +
             this.weight + "lbs, $" +
-            this.value + " (" + 
+            this.value + " (" +
             this.quantity + ")";
     }
 

@@ -1,3 +1,5 @@
+'use strict';
+
 class Conversation {
     constructor(participants, initialMessage) {
         this.participants = participants;

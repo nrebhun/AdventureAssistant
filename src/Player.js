@@ -1,3 +1,4 @@
+'use strict';
 
 // Enums
 const MessageResults = {
@@ -17,9 +18,9 @@ class Player {
 
     greet() {
         if (this.isCharacter) {
-            console.log("Welcome, " + this.characterName + 
-                        ", the Level " + this.characterLevel + 
-                        " " + this.characterClass + 
+            console.log("Welcome, " + this.characterName +
+                        ", the Level " + this.characterLevel +
+                        " " + this.characterClass +
                         " " + this.characterRace + "!");
         } else {
             console.log("Welcome, Dungeon Master " + this.playerName + "!");

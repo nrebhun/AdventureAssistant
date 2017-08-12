@@ -1,3 +1,5 @@
+'use strict';
+
 class Message {
     constructor(content) {
         this.timeStamp = new Date();
@@ -5,7 +7,7 @@ class Message {
     }
 
     getFormattedTimestamp() {
-        return  "Message sent on: " + 
+        return  "Message sent on: " +
                 this.timeStamp.getDate() + "/" +
                 (this.timeStamp.getMonth() + 1) + "/" +
                 this.timeStamp.getFullYear() + " @ " +

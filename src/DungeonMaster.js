@@ -1,3 +1,5 @@
+'use strict';
+
 var baseClass = require('Player.js');
 
 class DungeonMaster extends baseClass.Player {
