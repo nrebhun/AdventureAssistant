@@ -1,9 +1,6 @@
-var path = require("path");
-
 module.exports = {
-    resolve: {
-        root: [
-            path.resolve('./src')
-        ]
-    }
+  entry: './lib/src/app.js',
+  output: {
+    filename: './build/AdventureAssistant.bundle.js'
+  }
 }
