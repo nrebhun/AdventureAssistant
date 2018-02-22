@@ -2,8 +2,6 @@
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Runtime data
 pids
@@ -17,15 +15,14 @@ coverage
 # Bower dependency directory (https://bower.io/)
 bower_components
 
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
+# Artifacts
+build/
 
 # Dependency directories
 node_modules/
 
 # Target directories:
 lib/
-bundle/
 
 # Optional npm cache directory
 .npm
@@ -38,9 +35,3 @@ bundle/
 
 # Output of 'npm pack'
 *.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variables file
-.env

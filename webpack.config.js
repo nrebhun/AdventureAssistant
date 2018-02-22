@@ -1,6 +1,26 @@
 module.exports = {
-  entry: './lib/src/app.js',
-  output: {
-    filename: './build/AdventureAssistant.bundle.js'
-  }
-}
+    entry: ['./src/index.js'],
+    output: {
+        path: __dirname,
+        publicPath: '/',
+        filename: 'bundle.js'
+    },
+    module: {
+        loaders: [
+            {
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['react', 'es2017']
+                }
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
+    devServer: {
+        historyApiFallback: true,
+        contentBase: './'
+    }
+};
